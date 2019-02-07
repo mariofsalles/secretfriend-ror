@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: OneSecretFriend_development
+
+test:
+  <<: *default
+  database: OneSecretFriend_test
+
+production:
+  <<: *default
+  database: OneSecretFriend_production
+  username: OneSecretFriend
+  password: <%= ENV['ONESECRETFRIEND_DATABASE_PASSWORD'] %>
