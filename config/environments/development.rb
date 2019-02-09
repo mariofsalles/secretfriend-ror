@@ -6,6 +6,11 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+  # MailCatcher
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
+  config.action_mailer.raise_delivery_errors = false
+
   # Do not eager load code on boot.
   config.eager_load = false
 
