@@ -7,6 +7,11 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 # Require every file in folder support belong to rails_helper.rb 
 Dir[Rails.root.join('spec/support/**/*.rb')].each {|f| require f}
+
+RSpec.configure do |config|
+  config.include Devise::Test::COntrollerHelpers, type: :controllers
+end
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
