@@ -48,7 +48,6 @@ RSpec.describe CampaignsController, type: :controller do
 
 
   describe "POST #create" do
-
     before(:each) do
       @campaign_attributes = attributes_for(:campaign, user: @current_user)
       post :create, params: {campaign: @campaign_attributes}
@@ -61,8 +60,8 @@ RSpec.describe CampaignsController, type: :controller do
 
     it "Create campaign with right attributes" do
       expect(Campaign.last.user).to eql(@current_user)
-      expect(Campaign.last.title).to eql(@campaign_attributes[:title])
-      expect(Campaign.last.description).to eql(@campaign_attributes[:description])
+      expect(Campaign.last.title).to eql("Nova Campanha")
+      expect(Campaign.last.description).to eql("Descreva sua campanha...")
       expect(Campaign.last.status).to eql('pending')
     end
 
@@ -135,8 +134,7 @@ RSpec.describe CampaignsController, type: :controller do
         @campaign = create(:campaign, user: @current_user)
       end
 
-      context "Members >= 3" do
-
+      context "Has more than two members" do
         before(:each) do
           create(:member, campaign: @campaign)
           create(:member, campaign: @campaign)
@@ -149,8 +147,7 @@ RSpec.describe CampaignsController, type: :controller do
         end
       end
 
-      context "Members <= 3" do
-
+      context "No more than two members" do
         before(:each) do
           create(:member, campaign: @campaign)
           post :raffle, params: {id: @campaign.id}
@@ -160,11 +157,9 @@ RSpec.describe CampaignsController, type: :controller do
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
-      
     end
 
     context "User isn't the Campaign Owner" do
-
       before(:each) do
         @campaign = create(:campaign)
         post :raffle, params: {id: @campaign.id}
