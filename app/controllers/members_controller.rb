@@ -5,17 +5,17 @@ class MembersController < ApplicationController
   before_action :is_owner?, only: [:destroy, :update]
   before_action :set_member_by_token, only: [:opened]
 
-  def create
-    @member = Member.new(member_params)
+def create
+  @member = Member.new(member_params)
 
-    respond_to do |format|
-      if @member.save
-        format.json { render json: true }
-      else
-        format.json { render json: @member.errors, status: :unprocessable_entity }
-      end
+  respond_to do |format|
+    if @member.save
+      format.json { render json: @member }
+    else
+      format.json { render json: @member.errors, status: :unprocessable_entity }
     end
   end
+end
 
   def destroy
     @member.destroy
