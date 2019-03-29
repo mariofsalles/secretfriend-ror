@@ -35,7 +35,8 @@ gem 'redis', '~> 4.0'
 gem 'sidekiq'
 # Manage Procfile-based applications
 gem 'foreman'
-
+gem 'inky-rb', require: 'inky'
+gem 'premailer-rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
