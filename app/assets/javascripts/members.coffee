@@ -1,10 +1,10 @@
 $(document).on 'turbolinks:load', ->
   $('#member_email, #member_name').keypress (e) ->
-    if e.which == 13 && valid_email($( "#member_email" ).val()) && $( "#member_name" ).val() != ""
+    if (e.which is 13) && (valid_email($( "#member_email" ).val())) && ($( "#member_name" ).val() != "")
       $('.new_member').submit()
 
   $('#member_email, #member_name').bind 'blur', ->
-    if valid_email($( "#member_email" ).val()) && $( "#member_name" ).val() != ""
+    if (valid_email($( "#member_email" ).val())) && ($( "#member_name" ).val() != "")
       $('.new_member').submit()
 
   $('body').on 'click', 'a.remove_member', (e) ->
@@ -25,7 +25,7 @@ $(document).on 'turbolinks:load', ->
         dataType: 'json',
         data: $(".new_member").serialize()
         success: (data, text, jqXHR) ->
-          insert_member(data['id'], data['name'],  data['email'])
+          insert_member(data['id'], data['name'], data['email'])
           $('#member_name, #member_email').val("")
           $('#member_name').focus()
           Materialize.toast('Membro adicionado', 4000, 'green')
@@ -58,4 +58,5 @@ insert_member = (id, name, email) ->
           '</a>' +
         '</div>' +
       '</div>' +
-    '</div>')
+    '</div>'
+  )
